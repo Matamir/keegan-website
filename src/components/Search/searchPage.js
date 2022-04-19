@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 
-const HomePage = () => {
-    
+const SearchPage = () => {
     useEffect(() => {
-        document.title = "Home"
+        document.title = "Search"
     }, []);
 
     return (
@@ -12,4 +11,4 @@ const HomePage = () => {
         </div>
     )
 }
-export default HomePage;
+export default SearchPage;
