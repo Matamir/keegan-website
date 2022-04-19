@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+
+.navBarCustom{
+  background-color: lightgray;
+  padding: 1%;
+  font-size: 200%;
+}

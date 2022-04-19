@@ -1,7 +1,7 @@
 const HomePage = () => {
     return(
-        <div className="">
-            Hello There
+        <div className="mt-2">
+            Welcome to justkpl, 
         </div>
     )
 }
