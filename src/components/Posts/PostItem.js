@@ -25,7 +25,11 @@ const PostItem = ({
             <a href="home/17966818138593040"><img className="postImage" src={post.image} /></a>
             {post.caption}
             <br />
-            <i class="fas fa-heart" style={{color:color}} onClick={() => {likeClicked()}}>{post.likes}</i>
+            <div className="row">
+                <div className="col"><i class="fas fa-heart" style={{ color: color }} onClick={() => { likeClicked() }}>{post.likes}</i></div>
+                <div className="col"><p>hello</p></div>
+            </div>
+
         </div>
     </>);
 }

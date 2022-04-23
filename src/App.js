@@ -7,6 +7,7 @@ import NavBar from './components/NavBar/navBar';
 import HomePage from './components/Home/homePage';
 import LoginPage from './components/LoginPage/loginPage'
 import SearchPage from './components/Search/searchPage';
+import ProfilePage from './components/profile/profile';
 
 function App() {
   return (
@@ -29,9 +30,9 @@ function App() {
                 element={<SearchPage/>} />
 
               <Route path="profile"
-                element={null}>
-                <Route index
-                  element={null} />
+                element={<ProfilePage/>}>
+                <Route path=":id"
+                  element={<ProfilePage/>} />
               </Route>
 
 
