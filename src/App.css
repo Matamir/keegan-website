@@ -53,6 +53,31 @@
   width: 100%;
 }
 
+.postPageUsername {
+  margin-left: 5%;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.postPage {
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.postPageComments {
+  
+}
+
+.postPageImage {
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 2%;
+  width:100%;
+}
+
 a:link { text-decoration: none; }
 
 
@@ -63,3 +88,7 @@ a:hover { text-decoration: none; }
 
 
 a:active { text-decoration: none; }
+
+.notFound {
+  font-size: 300px;
+}

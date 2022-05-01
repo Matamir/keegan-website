@@ -1,8 +1,13 @@
 import axios from 'axios';
-const POSTS_API = 'http://localhost:4000/api/posts'
+const POSTS_API = 'https://plartsta.herokuapp.com/api/posts'
 
 export const findAllPosts = async () => {
     const res = await axios.get(POSTS_API);
     const posts = res.data;
     return posts;
+}
+
+export const updatePost = async (post) => {
+    const res = await axios.put(`${POSTS_API}/${post._id}`, post);
+    return res.data;
 }

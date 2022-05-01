@@ -1,25 +1,55 @@
-import { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import posts from "../Posts/posts.json";
+import { useDispatch, useSelector } from 'react-redux';
+import { findAllPosts } from '../../actions/posts-actions';
+import { findAllComments } from '../../actions/comments-actions';
+
 
 const PostPage = () => {
-    useEffect(() => {
-        document.title = "Post"
-    }, []);
-    
-    let {id} = useParams();
+    let { id } = useParams();
+    const comments = useSelector((state) => state.comments);
+    const dispatch1 = useDispatch();
 
-    let postByID = posts.filter(p => p.id == id)[0];
+    const posts = useSelector((state) => state.posts);
+    const dispatch2 = useDispatch();
+    useEffect(() => {
+        findAllComments(dispatch1)
+        findAllPosts(dispatch2);
+    }, []);
+
+    console.log(posts);
+    console.log(id);
+    let postByID = posts.filter(p => p._id == id)[0];
 
     if (id !== undefined && postByID !== undefined) {
-        console.log(postByID);
-
-
-        return(
+        return (
             <div className="mt-2 homePageCustom text-monospace">
-                <p>Hello there</p>Welcome to post {id}.
-                <img className="postImage" src={postByID.image} />
-                {postByID.caption}
+
+                <div className="postPage">
+                    <a href="https://www.instagram.com/plartsta/" className="text-dark" target="_blank">
+                        <div className="postPageUsername">{postByID.username}</div>
+                    </a>
+                    <img className="postPageImage" src={postByID.image} />
+                    <div className="text-center">{postByID.caption}</div>
+                </div>
+                <div className="postPageComments">
+                    postByID.comments
+                </div>
+            </div>
+
+        )
+    }
+    else {
+        return (
+            <div>
+                <div className="notFound text-center">
+                    404
+                </div>
+                <div className="text-center">
+                    <h3>Could not find post</h3>
+                    <a href="../">Go Back</a>
+                </div>
+
             </div>
         )
     }

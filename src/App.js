@@ -10,46 +10,58 @@ import SearchPage from './components/Search/searchPage';
 import ProfilePage from './components/profile/profile';
 import PostPage from './components/PostPage/PostPage';
 
+
+import { Provider } from 'react-redux';
+import {combineReducers, createStore} from 'redux';
+import postsReducer from './reducers/posts-reducer';
+import commentsReducer from './reducers/comments-reducer';
+import usersReducer from './reducers/users-reducer';
+
+const reducer = combineReducers({posts: postsReducer, users: usersReducer, comments: commentsReducer})
+const store = createStore(reducer);
+
 function App() {
   return (
-    <div>
-      <NavBar />
-      <BrowserRouter>
-        <div className="container">
-          <Routes>
-            <Route index
-              element={<HomePage />} />
-            <Route path="/">
-
-              <Route path="home"
+    <Provider store={store}>
+      <div>
+        <NavBar />
+        <BrowserRouter>
+          <div className="container">
+            <Routes>
+              <Route index
                 element={<HomePage />} />
+              <Route path="/">
 
-              <Route path="login"
-                element={<LoginPage />} />
+                <Route path="home"
+                  element={<HomePage />} />
 
-              <Route path="search"
-                element={<SearchPage />} />
+                <Route path="login"
+                  element={<LoginPage />} />
 
-              <Route path="profile"
-                element={<ProfilePage />}>
-                <Route path=":id"
-                  element={<ProfilePage />} />
+                <Route path="search"
+                  element={<SearchPage />} />
+
+                <Route path="profile"
+                  element={<ProfilePage />}>
+                  <Route path=":id"
+                    element={<ProfilePage />} />
+                </Route>
+
+                <Route path="post"
+                  element={<PostPage />}>
+                  <Route path=":id"
+                    element={<PostPage />} />
+                </Route>
+
+                <Route path="details"
+                  element={null} />
+
               </Route>
-
-              <Route path="post"
-                element={<PostPage />}>
-                <Route path=":id"
-                  element={<PostPage />} />
-              </Route>
-
-              <Route path="details"
-                element={null} />
-
-            </Route>
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </div>
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </div>
+    </Provider>
   );
 }
 export default App;

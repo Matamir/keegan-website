@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { findAllPosts } from "../../actions/posts-actions";
 
-import posts from "./posts.json";
 import PostItem from "./PostItem";
 
 const PostList = () => {
@@ -13,6 +12,8 @@ const PostList = () => {
         findAllPosts(dispatch), []
     );
 
+    console.log(posts);
+    
     let groupedPosts = [[]];
     let group = 0;
     posts.map((post, index) => {
