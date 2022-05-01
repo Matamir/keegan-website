@@ -8,6 +8,7 @@ import HomePage from './components/Home/homePage';
 import LoginPage from './components/LoginPage/loginPage'
 import SearchPage from './components/Search/searchPage';
 import ProfilePage from './components/profile/profile';
+import PostPage from './components/PostPage/PostPage';
 
 function App() {
   return (
@@ -19,22 +20,27 @@ function App() {
             <Route index
               element={<HomePage />} />
             <Route path="/">
-              
+
               <Route path="home"
                 element={<HomePage />} />
-              
+
               <Route path="login"
                 element={<LoginPage />} />
-              
+
               <Route path="search"
-                element={<SearchPage/>} />
+                element={<SearchPage />} />
 
               <Route path="profile"
-                element={<ProfilePage/>}>
+                element={<ProfilePage />}>
                 <Route path=":id"
-                  element={<ProfilePage/>} />
+                  element={<ProfilePage />} />
               </Route>
 
+              <Route path="post"
+                element={<PostPage />}>
+                <Route path=":id"
+                  element={<PostPage />} />
+              </Route>
 
               <Route path="details"
                 element={null} />

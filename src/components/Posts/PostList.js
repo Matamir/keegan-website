@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import { useDispatch, useSelector } from 'react-redux';
+import { findAllPosts } from "../../actions/posts-actions";
 
 import posts from "./posts.json";
 import PostItem from "./PostItem";
 
 const PostList = () => {
+    const posts = useSelector((state) => state.posts);
+    const dispatch = useDispatch();
+    useEffect(() =>
+        findAllPosts(dispatch), []
+    );
+
     let groupedPosts = [[]];
     let group = 0;
     posts.map((post, index) => {
