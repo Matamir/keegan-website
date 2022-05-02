@@ -5,6 +5,32 @@ export const FIND_ALL_COMMENTS = 'FIND_ALL_COMMENTS';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 
+export const FIND_COMMENTS_BY_POST = "FIND_COMMENTS_BY_POST";
+export const FIND_COMMENTS_BY_USER = "FIND_COMMENTS_BY_USER";
+
+
+
+export const findCommentsByPost = async (dispatch, pid) => {
+    const comments = await service.findCommentsByPost(pid);
+    console.log('hello');
+    console.log(comments);
+    dispatch({
+        type: FIND_COMMENTS_BY_POST,
+        comments
+    })
+}
+
+export const findCommentsByUser = async (dispatch, uid) => {
+    const comments = await service.findCommentsByUser(uid);
+    dispatch({
+        type: FIND_COMMENTS_BY_USER,
+        comments
+    })
+}
+
+
+
+
 
 export const createComment = async (dispatch, comment) => {
     const newComment = await service.createComment(comment);

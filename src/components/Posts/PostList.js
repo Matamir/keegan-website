@@ -8,12 +8,10 @@ import PostItem from "./PostItem";
 const PostList = () => {
     const posts = useSelector((state) => state.posts);
     const dispatch = useDispatch();
-    useEffect(() =>
-        findAllPosts(dispatch), []
-    );
+    useEffect(() => {
+        findAllPosts(dispatch)
+    }, []);
 
-    console.log(posts);
-    
     let groupedPosts = [[]];
     let group = 0;
     posts.map((post, index) => {

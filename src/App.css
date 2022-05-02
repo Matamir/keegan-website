@@ -68,26 +68,57 @@
 }
 
 .postPageComments {
-  
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.commentText {
+  width: 80%;
+  height: 100%;
+}
+
+.signinInput {
+  margin-left: 10%;
+  width: 80%;
+  height: 100%;
+}
+
+.commentButton {
+  width: 20%;
+  height: 100%;
+}
+
+.deleteCommentButton {
+  margin-left: 5%;
+  width: 10%;
+  height: 100%;
 }
 
 .postPageImage {
   padding-left: 5%;
   padding-right: 5%;
   padding-bottom: 2%;
-  width:100%;
+  width: 100%;
 }
 
-a:link { text-decoration: none; }
+a:link {
+  text-decoration: none;
+}
 
 
-a:visited { text-decoration: none; }
+a:visited {
+  text-decoration: none;
+}
 
 
-a:hover { text-decoration: none; }
+a:hover {
+  text-decoration: none;
+}
 
 
-a:active { text-decoration: none; }
+a:active {
+  text-decoration: none;
+}
 
 .notFound {
   font-size: 300px;
