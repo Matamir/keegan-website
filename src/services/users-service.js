@@ -23,13 +23,13 @@ export const updateUser = async (user) => {
 }
 
 export const findUserbyCredentials = async (username, password) => {
-    const res = await axios.get(`${USERS_API}/credentials/${username}/${password}`);
+    const res = await axios.get(`${USERS_API}/credentials/${username}/${password}/`);
     const user = res.data;
     return user;
 }
 
 export const findUserbyUsername = async (username) => {
-    const res = await axios.get(`${USERS_API}/username/${username}`);
+    const res = await axios.get(`${USERS_API}/username/${username}/`);
     return res.data;
 }
 

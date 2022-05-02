@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { findUserbyCredentials } from "../../actions/users-actions";
+import { findUserbyCredentials, findUserbyUsername} from "../../actions/users-actions";
 import { logUserIn, logUserOut } from "../../USER";
 
 const LoginPage = () => {
@@ -13,14 +13,14 @@ const LoginPage = () => {
     useEffect(() => {
         document.title = "Login"
         console.log('finding');
-        findUserbyCredentials(dispatchU, username, password);
+        findUserbyUsername(dispatchU, username);
     }, [username, password]);
 
 
 
-    async function loginClicked() {
+    function loginClicked() {
         if (username !== "" && password !== "") {
-            if (user !== null) {
+            if (user !== null && user.password === password) {
                 alert(new Error('Success!'))
                 logUserIn(user);
             } else {
@@ -31,9 +31,17 @@ const LoginPage = () => {
         }
     }
 
-    console.log(user);
-
-    //console.log(user);
+    function registerClicked() {
+        if (username !== "" && password !== "") {
+            if(user === null) {
+                alert('User created.')
+            } else {
+                alert('Username already taken.')
+            }
+        } else {
+            alert(new Error('Please fill in both username and password fields.'))
+        }
+    }
 
     return (
         <div className="mt-2 homePageCustom text-monospace">
@@ -43,6 +51,8 @@ const LoginPage = () => {
             <input type="text" className="signinInput" onChange={(e) => setPassword(e.target.value)}></input>
 
             <button className="commentButton btn-primary btn" onClick={() => { loginClicked(); }}>Sign In</button>
+            <button className="commentButton btn-primary btn" onClick={() => { registerClicked(); }}>Register</button>
+
         </div>
     )
 }
