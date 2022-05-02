@@ -4,12 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { findPostById } from '../../actions/posts-actions';
 import { createComment, findCommentsByPost } from "../../actions/comments-actions";
 import Comments from "./PostComments.js";
-import USER from "../../USER";
 
 
 const PostPage = () => {
-    const USER_ID = USER._id;
-
+    const USER_ID = localStorage._id;
 
     let { id } = useParams();
     const user = useSelector((state) => state.users);
@@ -29,7 +27,7 @@ const PostPage = () => {
     const [newComment, setNewComment] = useState({ pid: id, uid: USER_ID, text: "" });
 
     function postClicked() {
-        if(newComment.text !== "") {
+        if (newComment.text !== "") {
             createComment(dispatchC, newComment);
         }
     }

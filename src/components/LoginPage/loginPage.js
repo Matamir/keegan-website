@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { findUserbyCredentials } from "../../actions/users-actions";
+import { logUserIn, logUserOut } from "../../USER";
 
 const LoginPage = () => {
-    useEffect(() => {
-        document.title = "Login"
-    }, []);
+    const user = useSelector((state) => state.users);
+    const dispatchU = useDispatch();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const user = useSelector((state) => state.users);
-    const dispatchU = useDispatch();
+    useEffect(() => {
+        document.title = "Login"
+        console.log('finding');
+        findUserbyCredentials(dispatchU, username, password);
+    }, [username, password]);
+
+
 
     async function loginClicked() {
         if (username !== "" && password !== "") {
-            const user2 = await tryLogin();
-            if (user2 !== undefined) {
+            if (user !== null) {
                 alert(new Error('Success!'))
+                logUserIn(user);
             } else {
                 alert(new Error('User Not Found.'))
             }
@@ -26,12 +31,9 @@ const LoginPage = () => {
         }
     }
 
-    async function tryLogin() {
-        const loginUser = await findUserbyCredentials(dispatchU, username, password);
-        return loginUser;
-    }
-
     console.log(user);
+
+    //console.log(user);
 
     return (
         <div className="mt-2 homePageCustom text-monospace">
@@ -40,7 +42,7 @@ const LoginPage = () => {
             Password
             <input type="text" className="signinInput" onChange={(e) => setPassword(e.target.value)}></input>
 
-            <button className="commentButton btn-primary btn" onClick={() => { loginClicked() }}>Comment</button>
+            <button className="commentButton btn-primary btn" onClick={() => { loginClicked(); }}>Sign In</button>
         </div>
     )
 }
