@@ -11,13 +11,14 @@ const PostPage = () => {
 
     let { id } = useParams();
     const user = useSelector((state) => state.users);
-    console.log(user);
+    // console.log(user);
 
     const comments = useSelector((state) => state.comments);
     const dispatchC = useDispatch();
 
     const postByID = useSelector((state) => state.posts);
     const dispatchP = useDispatch();
+
     useEffect(() => {
         findCommentsByPost(dispatchC, id);
         findPostById(dispatchP, id);
@@ -32,9 +33,9 @@ const PostPage = () => {
         }
     }
 
-    console.log(id);
-    console.log(comments);
-    console.log(postByID);
+    // console.log(id);
+    // console.log(comments);
+    // console.log(postByID);
 
     if (id !== undefined && postByID !== undefined) {
         return (
@@ -58,7 +59,6 @@ const PostPage = () => {
 
         )
     }
-    // onClick={   createComment(dispatchC, {text:}  }
     else {
         return (
             <div>

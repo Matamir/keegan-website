@@ -33,3 +33,8 @@ export const findUserbyUsername = async (username) => {
     return res.data;
 }
 
+export const findUserById = async (uid) => {
+    const res = await axios.get(`${USERS_API}/${uid}/`)
+    return res.data;
+}
+

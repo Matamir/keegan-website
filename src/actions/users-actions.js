@@ -7,6 +7,7 @@ export const DELETE_USER = 'DELETE_USER';
 
 export const FIND_USER_CREDENTIALS = 'FIND_USER_CREDENTIALS';
 export const FIND_USER_USERNAME = 'FIND_USER_USERNAME';
+export const FIND_USER_ID = 'FIND_USER_ID';
 
 
 export const findUserbyCredentials = async (dispatch, username, password) => {
@@ -23,6 +24,14 @@ export const findUserbyUsername = async (dispatch, username) => {
         type: FIND_USER_USERNAME,
         user
     });
+}
+
+export const findUserById = async (dispatch, uid) => {
+    const user = await service.findUserById(uid);
+    dispatch({
+        type: FIND_USER_ID,
+        user
+    })
 }
 
 

@@ -1,4 +1,4 @@
-import { FIND_ALL_USERS, CREATE_USER, UPDATE_USER, DELETE_USER, FIND_USER_CREDENTIALS, FIND_USER_USERNAME } from "../actions/users-actions.js";
+import { FIND_ALL_USERS, CREATE_USER, UPDATE_USER, DELETE_USER, FIND_USER_CREDENTIALS, FIND_USER_USERNAME, FIND_USER_ID } from "../actions/users-actions.js";
 
 const usersReducer = (state = [], action) => {
     switch (action.type) {
@@ -15,6 +15,8 @@ const usersReducer = (state = [], action) => {
         case UPDATE_USER:
             return state.map(user => user._id === action.user._id ?
                 action.user : user);
+        case FIND_USER_ID:
+            return action.user;
         default:
             return state;
     }

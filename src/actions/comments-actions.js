@@ -12,8 +12,6 @@ export const FIND_COMMENTS_BY_USER = "FIND_COMMENTS_BY_USER";
 
 export const findCommentsByPost = async (dispatch, pid) => {
     const comments = await service.findCommentsByPost(pid);
-    console.log('hello');
-    console.log(comments);
     dispatch({
         type: FIND_COMMENTS_BY_POST,
         comments

@@ -1,18 +1,24 @@
 import { useEffect } from 'react';
+import { logUserOut } from '../../USER';
 
 const NavBar = () => {
     let username = localStorage.username;
-    
+
     let Login_Username = (
-        (username === undefined) ? (
-            <a href="/signin" className="text-dark p-1">
-                <i class="fas fa-sign-in-alt"></i>
-            </a>
-        ) : (<p className='text-dark p-1'>{username}</p>)
+        (username == "undefined") ?
+            (
+                <a href="/signin" className="text-dark p-1">
+                    <i class="fas fa-sign-in-alt"></i>
+                </a>
+            ) :
+            (<>
+                <i class="fas fa-sign-out-alt pt-3" onClick={() => {logUserOut(); window.location = '../'}}></i>
+                <p className='text-dark p-1'>{username}</p>
+            </>)
     )
 
-    useEffect(() => {});
-    
+    useEffect(() => { });
+
 
     console.log(Login_Username);
     console.log(username);
