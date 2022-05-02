@@ -8,6 +8,8 @@ const ProfilePage = () => {
 
     let {id} = useParams();
 
+    let yourID = localStorage._id;
+
     if (id !== undefined) {
         return(
             <div className="mt-2 homePageCustom text-monospace">

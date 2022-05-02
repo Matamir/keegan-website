@@ -17,6 +17,7 @@ const NavBar = () => {
     console.log(Login_Username);
     console.log(username);
 
+    let profileLink = '/profile/' + localStorage._id;
     return (
         <div className="navbar navBarCustom">
             <div className="d-flex">
@@ -26,7 +27,7 @@ const NavBar = () => {
             </div>
             <div className="d-flex justify-content-end">
                 {Login_Username}
-                <a href="/profile" className="text-dark p-1">
+                <a href={profileLink} className="text-dark p-1">
                     <i class="fas fa-user"></i>
                 </a>
                 <a href="https://www.instagram.com/plartsta/" className="text-dark p-1" target="_blank">

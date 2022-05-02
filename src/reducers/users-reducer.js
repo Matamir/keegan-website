@@ -9,7 +9,7 @@ const usersReducer = (state = [], action) => {
         case FIND_ALL_USERS:
             return action.users;
         case CREATE_USER:
-            return [...state, action.newUser];
+            return action.newUser;
         case DELETE_USER:
             return state.filter(user => user._id !== action.user._id);
         case UPDATE_USER:
