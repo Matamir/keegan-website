@@ -4,13 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { findPostById } from '../../actions/posts-actions';
 import { createComment, findCommentsByPost } from "../../actions/comments-actions";
 import Comments from "./PostComments.js";
+import { findAllUsers, findUserbyUsername, updateUser } from "../../actions/users-actions";
 
 
 const PostPage = () => {
     const USER_ID = localStorage._id;
+    const USER_USERNAME = localStorage.username;
 
     let { id } = useParams();
-    const user = useSelector((state) => state.users);
+    // const users = useSelector((state) => state.users);
+    // const dispatchU = useDispatch();
     // console.log(user);
 
     const comments = useSelector((state) => state.comments);
@@ -22,14 +25,28 @@ const PostPage = () => {
     useEffect(() => {
         findCommentsByPost(dispatchC, id);
         findPostById(dispatchP, id);
+        // findAllUsers(dispatchU);
     }, []);
 
 
+    // let user = users.filter(u => u.username === USER_USERNAME)
+    // if (user.length != 0) {
+    //     user = user[0];
+    // }
+
     const [newComment, setNewComment] = useState({ pid: id, uid: USER_ID, text: "" });
 
-    function postClicked() {
+    function commentClicked() {
         if (newComment.text !== "") {
             createComment(dispatchC, newComment);
+            // let updateComments = [].concat(user.comments);
+            // updateComments.push(newComment.uid);
+
+            // console.log(user);
+            // console.log(updateComments);
+            // let newUser = { ...user, "comments": updateComments }
+            // console.log(newUser);
+            // updateUser(dispatchU, newUser)
         }
     }
 
@@ -51,7 +68,7 @@ const PostPage = () => {
                 <div className="postPageComments">
                     <div>
                         <input className="commentText" onChange={(e) => setNewComment({ ...newComment, text: e.target.value })}></input>
-                        <button className="commentButton btn-primary btn" onClick={() => { postClicked(); }}>Comment</button>
+                        <button className="commentButton btn-primary btn" onClick={() => { commentClicked(); }}>Comment</button>
                     </div>
                     <ul>{comments.map(comment => { return (<Comments comment={comment} user={{ uid: USER_ID }} />) })}</ul>
                 </div>

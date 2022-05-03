@@ -83,6 +83,12 @@
   height: 100%;
 }
 
+.reloadButton {
+  margin-left: 50%;
+  height: 100px;
+  width: 10%;
+}
+
 .commentButton {
   width: 20%;
   height: 100%;

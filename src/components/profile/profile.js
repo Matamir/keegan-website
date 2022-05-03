@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { findAllComments } from '../../actions/comments-actions';
 import { createPost, findAllPosts } from '../../actions/posts-actions';
 import { findAllUsers, findUserById } from '../../actions/users-actions';
 
@@ -15,6 +16,9 @@ const ProfilePage = () => {
     const posts = useSelector((state) => state.posts);
     const dispatchP = useDispatch();
 
+    const comments = useSelector((state) => state.comments);
+    const dispatchC = useDispatch();
+
     console.log(id)
     useEffect(() => {
         document.title = "Profile";
@@ -22,7 +26,10 @@ const ProfilePage = () => {
             findAllUsers(dispatchU);
         }
         findAllPosts(dispatchP);
+        findAllComments(dispatchC);
     }, []);
+
+
 
     const userFiltered = users.filter(user => user._id === id);
     let userFound;
@@ -30,8 +37,13 @@ const ProfilePage = () => {
         userFound = userFiltered[0];
     }
 
+    console.log(comments);
 
-    console.log(userFound)
+    let commentsFiltered = comments.filter(c => c.uid == userFound._id);
+
+
+    console.log(userFound);
+    console.log(commentsFiltered);
 
     async function reloadFromInstaAPI() {
         console.log('reloading website');
@@ -63,7 +75,7 @@ const ProfilePage = () => {
                         timestamp: post.timestamp,
                         image: post.media_url,
                     }
-                    createPost(dispatchU, newPost);
+                    createPost(dispatchP, newPost);
                 }
             }
             instaAPI = next;
@@ -71,11 +83,31 @@ const ProfilePage = () => {
         console.log('reload done')
     }
 
+
+
+    let commentsList = [];
+    for (let key in commentsFiltered) {
+        commentsList.push(commentsFiltered[key]);
+    }
+
+    console.log(commentsList);
+
+
+    function getLink(pid) {
+        return "../post/" + pid;
+    }
+
     if (id !== undefined && userFound !== undefined) {
         return (
             <div className="mt-2 homePageCustom text-monospace">
-                <p>Hello there</p>Welcome to your profile user {userFound.username}.
-                {(userFound.userType === 'admin' && userFound._id == localStorage._id) ? (<button onClick={() => { reloadFromInstaAPI(); }}>Reload</button>) : (<>notAdmin</>)}
+                <h1>{userFound.username}</h1>
+                <div className='row'>
+                    <div className='ml-3'>Bio: {(userFound.bio != 'empty') ? (<input placeholder={userFound.bio}/>) : (<input placeholder='No Bio Yet'/>)}</div>
+
+                    {(userFound.userType === 'admin' && userFound._id == localStorage._id) ? (<button className='reloadButton' onClick={() => { reloadFromInstaAPI(); }}>Reload</button>) : (<></>)}
+                </div>
+                Comments:
+                {commentsList.map(c => { let link = getLink(c.pid); return <div><a href={link} className="text-dark font-weight-bold">{c.text}</a></div> })}
             </div>
         )
     }
