@@ -7,6 +7,12 @@ export const findAllPosts = async () => {
     return posts;
 }
 
+
+export const createPost = async (post) => { 
+    const res = await axios.post(POSTS_API, post);
+    return res.data;
+}
+
 export const updatePost = async (post) => {
     const res = await axios.put(`${POSTS_API}/${post._id}`, post);
     return res.data;
