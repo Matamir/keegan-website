@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { createPost, findAllPosts } from '../../actions/posts-actions';
 import { findAllUsers, findUserById } from '../../actions/users-actions';
-import mongoose from "mongoose";
 
 const ProfilePage = () => {
 
@@ -43,42 +42,31 @@ const ProfilePage = () => {
         let response = await axios.get(instaAPI);
         let list = response.data.data;
         console.log('reload 1')
-        for (let post in list) {
-            if (posts.filter(p => p._id === post.id).length !== 0);
-            let newPost = {
-                _id: post.id,
-                username: post.username,
-                caption: post.caption,
-                likes: 0,
-                timestamp: post.timestamp,
-                image: post.media_url,
-            }
-            createPost(dispatchU, newPost);
-        }
 
-        console.log('reload 2')
-
-        let next = response.data.paging.next;
-        while (next != undefined) {
+        while (instaAPI != undefined) {
+            let next = response.data.paging.next;
             console.log('reload 3')
-            instaAPI = next;
             response = await axios.get(instaAPI);
             list = response.data.data;
             for (let key in list) {
                 let post = list[key];
                 console.log(post);
-                if (posts.filter(p => p._id === post.id).length !== 0);
-                let newPost = {
-                    _id: mongoose.Types.ObjectId(post.id),
-                    username: post.username,
-                    caption: post.caption,
-                    likes: 0,
-                    timestamp: post.timestamp,
-                    image: post.media_url,
+                console.log(posts);
+                let filteredPost = posts.filter(p => p.pid == post.id)
+                console.log(filteredPost);
+                if (filteredPost.length === 0) {
+                    let newPost = {
+                        pid: post.id,
+                        username: post.username,
+                        caption: post.caption,
+                        likes: 0,
+                        timestamp: post.timestamp,
+                        image: post.media_url,
+                    }
+                    createPost(dispatchU, newPost);
                 }
-                createPost(dispatchU, newPost);
             }
-            next = response.data.paging.next;
+            instaAPI = next;
         }
         console.log('reload done')
     }
