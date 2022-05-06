@@ -6,18 +6,17 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from './components/NavBar/navBar';
 import HomePage from './components/Home/homePage';
 import LoginPage from './components/LoginPage/loginPage'
-import SearchPage from './components/Search/searchPage';
 import ProfilePage from './components/profile/profile';
 import PostPage from './components/PostPage/PostPage';
 
 
 import { Provider } from 'react-redux';
-import {combineReducers, createStore} from 'redux';
+import { combineReducers, createStore } from 'redux';
 import postsReducer from './reducers/posts-reducer';
 import commentsReducer from './reducers/comments-reducer';
 import usersReducer from './reducers/users-reducer';
 
-const reducer = combineReducers({posts: postsReducer, users: usersReducer, comments: commentsReducer})
+const reducer = combineReducers({ posts: postsReducer, users: usersReducer, comments: commentsReducer })
 const store = createStore(reducer);
 
 function App() {
@@ -31,15 +30,17 @@ function App() {
               <Route index
                 element={<HomePage />} />
               <Route path="/">
+                <Route path=":id"
+                  element={<HomePage />} />
 
                 <Route path="home"
-                  element={<HomePage />} />
+                  element={<HomePage />}>
+                  <Route path=":id"
+                    element={<HomePage />} />
+                </Route>
 
                 <Route path="signin"
                   element={<LoginPage />} />
-
-                <Route path="search"
-                  element={<SearchPage />} />
 
                 <Route path="profile"
                   element={<ProfilePage />}>
@@ -52,9 +53,6 @@ function App() {
                   <Route path=":id"
                     element={<PostPage />} />
                 </Route>
-
-                <Route path="details"
-                  element={null} />
 
               </Route>
             </Routes>

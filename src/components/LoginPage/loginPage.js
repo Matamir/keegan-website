@@ -14,7 +14,7 @@ const LoginPage = () => {
         document.title = "Login"
         console.log('finding');
         findUserbyUsername(dispatchU, username);
-    });
+    },[username]);
 
 
 
@@ -52,11 +52,14 @@ const LoginPage = () => {
         <div className="mt-2 homePageCustom text-monospace">
             Username
             <input type="text" className="signinInput" onChange={(e) => setUsername(e.target.value)}></input>
+            
+            <p/>
+
             Password
             <input type="text" className="signinInput" onChange={(e) => setPassword(e.target.value)}></input>
 
-            <button className="commentButton btn-primary btn" onClick={() => { loginClicked();}}>Sign In</button>
-            <button className="commentButton btn-primary btn" onClick={() => { registerClicked(); }}>Register</button>
+            <button className="signinButton btn-primary btn" onClick={() => { loginClicked();}}>Sign In</button>
+            <button className="signinButton btn-primary btn" onClick={() => { registerClicked(); }}>Register</button>
 
         </div>
     )

@@ -37,16 +37,21 @@ const PostPage = () => {
     const [newComment, setNewComment] = useState({ pid: id, uid: USER_ID, text: "" });
 
     function commentClicked() {
-        if (newComment.text !== "") {
-            createComment(dispatchC, newComment);
-            // let updateComments = [].concat(user.comments);
-            // updateComments.push(newComment.uid);
+        console.log(USER_ID);
+        if (USER_ID == "undefined") {
+            window.location = '../signin'
+        } else {
+            if (newComment.text !== "") {
+                createComment(dispatchC, newComment);
+                // let updateComments = [].concat(user.comments);
+                // updateComments.push(newComment.uid);
 
-            // console.log(user);
-            // console.log(updateComments);
-            // let newUser = { ...user, "comments": updateComments }
-            // console.log(newUser);
-            // updateUser(dispatchU, newUser)
+                // console.log(user);
+                // console.log(updateComments);
+                // let newUser = { ...user, "comments": updateComments }
+                // console.log(newUser);
+                // updateUser(dispatchU, newUser)
+            }
         }
     }
 

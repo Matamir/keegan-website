@@ -10,6 +10,10 @@ const ProfilePage = () => {
 
     let { id } = useParams();
 
+    if (id == "undefined") {
+        window.location = '../signin';
+    }
+
     const users = useSelector((state) => state.users);
     const dispatchU = useDispatch();
 
