@@ -45,6 +45,11 @@
   font-size: 200%;
 }
 
+.searchBar {
+  background-color: lightgray;
+  border-radius: 20px;
+}
+
 .homePageCustom {
   font-size: large;
 }
