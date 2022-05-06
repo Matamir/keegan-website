@@ -55,7 +55,7 @@ const PostItem = ({
     let link = "post/" + post._id;
 
     return (<>
-        <div class="col border border-dark">
+        <div class="col border border-dark rounded">
             {post.username}
             <a href={link}><img className="postImage" src={post.image} /></a>
             {post.caption}

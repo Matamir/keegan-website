@@ -32,7 +32,7 @@ const NavBar = () => {
                 </a>
             </div>
             <div className='d-flex justify-content-center'>
-                <input type="text" placeholder='Search Here' onKeyDown={(e) => {if(e.key == 'Enter') {let linkSearch = '../' + e.currentTarget.value.toString(); console.log(linkSearch); window.location=linkSearch}}}></input>
+                <input type="text" placeholder='Search Here' onKeyDown={(e) => {if(e.key == 'Enter') {let linkSearch = '../' + e.currentTarget.value.toString(); window.location=linkSearch}}}></input>
             </div>
             <div className="d-flex justify-content-end">
                 {Login_Username}
