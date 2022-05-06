@@ -11,7 +11,7 @@ const postsReducer = (state = [], action) => {
             return action.post;
         case CREATE_POST:
             // Don't change state when creating post
-            return state;
+            return [...state, action.newPost];
         default:
             return state;
     }

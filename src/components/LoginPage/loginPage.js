@@ -9,12 +9,13 @@ const LoginPage = () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [admin, setAdmin] = useState(false)
 
     useEffect(() => {
         document.title = "Login"
         console.log('finding');
         findUserbyUsername(dispatchU, username);
-    },[username]);
+    }, [username]);
 
 
 
@@ -34,8 +35,13 @@ const LoginPage = () => {
 
     async function registerClicked() {
         if (username !== "" && password !== "") {
+            let userType = "user";
+            if (admin) {
+                userType = "admin";
+            }
+
             if (user === null) {
-                createUser(dispatchU, { username: username, password: password });
+                createUser(dispatchU, { username: username, password: password, userType: userType});
                 alert('User created.')
                 let newUsername = "";
                 newUsername = (username);
@@ -50,16 +56,21 @@ const LoginPage = () => {
 
     return (
         <div className="mt-2 homePageCustom text-monospace">
+            <h1 className="mb-5 mt-5">Sign In/Register</h1>
             Username
             <input type="text" className="signinInput" onChange={(e) => setUsername(e.target.value)}></input>
-            
-            <p/>
+
+            <p />
 
             Password
-            <input type="text" className="signinInput" onChange={(e) => setPassword(e.target.value)}></input>
+            <input type="password" className="signinInput" onChange={(e) => setPassword(e.target.value)}></input>
+            <br/>
+            ADMIN
+            <input type="checkbox" className="adminButton" onChange={(e) => setAdmin(e.target.checked)}></input>
 
-            <button className="signinButton btn-primary btn" onClick={() => { loginClicked();}}>Sign In</button>
+            <button className="signinButton btn-primary btn" onClick={() => { loginClicked(); }}>Sign In</button>
             <button className="signinButton btn-primary btn" onClick={() => { registerClicked(); }}>Register</button>
+
 
         </div>
     )

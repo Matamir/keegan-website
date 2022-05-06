@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { findAllComments } from '../../actions/comments-actions';
@@ -31,7 +31,7 @@ const ProfilePage = () => {
         }
         findAllPosts(dispatchP);
         findAllComments(dispatchC);
-    }, []);
+    }, [dispatchP]);
 
 
 
@@ -55,20 +55,17 @@ const ProfilePage = () => {
         let accessToken = res.data.access_token;
         let instaAPI = 'https://graph.instagram.com/7509095509130541/media?fields=id,media_url,username,timestamp,caption&access_token=' + accessToken;
 
-        let response = await axios.get(instaAPI);
-        let list = response.data.data;
-        console.log('reload 1')
+        console.log('reload start')
 
         while (instaAPI != undefined) {
-            let next = response.data.paging.next;
+            let response = await axios.get(instaAPI);
+            let list = response.data.data;
             console.log('reload 3')
-            response = await axios.get(instaAPI);
-            list = response.data.data;
             for (let key in list) {
                 let post = list[key];
                 console.log(post);
                 console.log(posts);
-                let filteredPost = posts.filter(p => p.pid == post.id)
+                let filteredPost = posts.filter(p => p.timestamp == post.timestamp)
                 console.log(filteredPost);
                 if (filteredPost.length === 0) {
                     let newPost = {
@@ -82,6 +79,7 @@ const ProfilePage = () => {
                     createPost(dispatchP, newPost);
                 }
             }
+            let next = response.data.paging.next;
             instaAPI = next;
         }
         console.log('reload done')
@@ -101,13 +99,19 @@ const ProfilePage = () => {
         return "../post/" + pid;
     }
 
+    // <div className='ml-3'>Bio: {(userFound.bio != 'empty') ? (<input placeholder={userFound.bio} />) : (<input placeholder='No Bio Yet' />)}</div>
+
+    const [passVis, setPassVis] = useState(true);
+    let passwordDisplay = (passVis) ? <button onClick={() => { console.log("pressed1"); setPassVis(!passVis) }}> Show Password </button> : <>{userFound.password}</>
+
+
     if (id !== undefined && userFound !== undefined) {
         return (
-            <div className="mt-2 homePageCustom text-monospace">
+            <div className="mt-5 homePageCustom text-monospace">
                 <h1>{userFound.username}</h1>
                 <div className='row'>
-                    <div className='ml-3'>Bio: {(userFound.bio != 'empty') ? (<input placeholder={userFound.bio}/>) : (<input placeholder='No Bio Yet'/>)}</div>
-
+                    <div className='ml-3 mr-5'>{(userFound.username === localStorage.username) ? <>Username: {userFound.username}</> : (<></>)}</div>
+                    <div className='ml-5'>{(userFound.username === localStorage.username) ? <>Password: {passwordDisplay}</> : (<></>)}</div>
                     {(userFound.userType === 'admin' && userFound._id == localStorage._id) ? (<button className='reloadButton' onClick={() => { reloadFromInstaAPI(); }}>Reload</button>) : (<></>)}
                 </div>
                 Comments:
